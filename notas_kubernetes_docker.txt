@@ -1,0 +1,118 @@
+Kubernetes: is a orquestation containers platform that automate deploys, 
+management, scalability apps dockerized.
+
+
+Deploy app in K8s(sometimes shortened to K8sn  with the 8 standing for the number of letters between the “K” and the “s”).
+
+¿Qué es un POD? 
+Es un set de contenedores con un solo IP, es decir, comparten el mismo Namespace de red.
+
+¿Qué es Overlay network?
+Permite compartir una red entre todos los PODS no importa en qué nodo esté.
+
+¿Qué es un Servicio de Kubernetes?
+	-Cluster IP (IP que no cambia y que expone a varios POD).
+
+TIPO de SERVICIOS EN KUBERNETES:
+ -Load balancer: crea un balanceador de carga en el proveedor cloud (AWS, Google, Azure, etc.)
+ -Ingress: crea reglas basadas en el subdominio.
+ -Cluster IP.
+ -Node port: crea puerto en el nodo que llega a mi tráfico.
+
+
+
+Kubernetes follows a master-node architecture. Master manage the cluster while that nodes execute apps dockerized.
+Maneja master y workers. 
+	1.Cada worker (NODO) corre un agente de kubernetes que se llama kubelet.
+		a. Es donde vamos a correr los pods de la app.
+	2. En Master tenemos 
+		a. api server (expone una interfaz para que diferentes clientes puedan interactuar
+		kubernetes).
+		b. Controller Manager: el que maneja lo que pasa en el cluster.
+		c. Scheduler: recibir las órdenes del controller manager y mueve los PODS.
+		d. Base de datos etcd donde guarda todo. Tiene el estado de los cluster de Kubernetes y también la información y configuraciones del CLuster.
+
+
+Kubernetes se maneja con manifiestos declarativos (se llaman deployments)  (tipo yaml):
+Example:
+	apiVersion: v1
+	kind: deployment
+	metadata:
+	   app: backend
+	spec:
+	   replicas: 3
+	   containers:
+	       -name: miapp-backend
+		image: pablokbs/backend
+		env:
+		   -name: DEBUG
+                   -value: true
+
+Kubernetes components:
+   -Pods: basic units of deploy.
+   -Services: Expose apps in the network.
+   -Deployments: management the apps updates.
+   -Namespaces: gather resources.
+
+Kubernates basic commands: 
+	-kubectl get pods: list the pods.
+	-kubectl create -f <file>: create sources from a file.
+	-kubectl delete pod <pod_name>: delete a pod.
+
+Kubernates pattern design:
+	-Sidecar: contenedor adicional que extiende la funcionalidad de la aplicación principal.
+	-Adapter: transforma la interfaz de un contendero.
+	-Ambassador: contenedor que actúa como proxy.
+
+Kubernetes en AWS EKS:
+	Introducción:
+		AWS EKS: es un servicios que facilita la ejecución de Kubernetes en AWS sin necesidad de instalar y operar su propio clúster de Kubernetes.
+	EKS(AWS), AKS(Azure), GKE(Google): son servicios gestionados de kubernetes. Cada uno ofrece características únicas y se integra con sus respectivos ecosistemas de nube.
+
+	Use cases: 1. Despliegue de microservicios.
+		   2. Aplicaciones de machine learning.
+		   3. Procesamiento de datos en tiempo real.
+ 	           4. Aplicaciones web escalables.
+
+
+COMANDOS INDOSWPENSABLES PARA KUBERNETES:
+
+-validar un manifiesto (asegurar que todos mis manifiestos están correctos): kubernetes create --dry-run=client --validate -f 02 <nombre_archivo> 
+-Obtener todos los nodos: kubernetes get nodes
+-obtener los deploys: kubernetes get deploys
+-para escalar: kubernetes k scale deploy/<file_name> --replicas=5
+-obtener documentación o explicación: kubernetes explain 
+					(o también) kubernetes k explain pod.espec 
+					kubernetes explain deployment.spec.replicas
+-obtener todos los pods: kubernetes get pods
+			 kubernetes get pods --sort-by=metadata.name (ordenado algabeticamente)
+			 kubernetes kubernetes pods --sort-by=metadata.creationTimestamp (orden por vejez)
+crea contenedor: kubernetes run --rm -it --image=alpine -- sh
+crear manifiesto kubernetes con comando: kubernetes create deploy nginx --image=nginx --dry-run=client -o yaml
+crear manifiesto con otras opciones: kubernetes create deploy nginx --image=nginx --restart=Never --limits='cpu=300,memory=512mi' --dry-run=client -o yaml
+crear servicio nginx: kubernetes expose deployment nginx --type=ClusterIP --port=80
+crear deploys: kubectl create deploy web --replicas=2 --image=nginx:1.13.2
+configurar un deployment a una versuión más actualizada: kubectl set image deployment web nginx=nginx:1.14.2 --record
+ver el estado del deployment: kubernetes rollout status deployment/web
+ver historial: kubernetes rollout history deployment/web
+devolver versión; kubernetes rollout undo deployment/web --to-revision=1
+saber información de un pod: kubernates describe pod 
+
+
+Balanceadores de carga: 
+	-Tipos:
+		ClusterIP: Acceso interno.
+		NodePort: Acceso externo.
+		LoadBalancer: balanceo de carga externo.
+
+
+		
+
+Patrones de partición: 
+	Sharding: División de datos.
+	Hash Partitioning: Distribucion basada en hash.
+	Range partioning: Division por rangos.
+
+
+
+
