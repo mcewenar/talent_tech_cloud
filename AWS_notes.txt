@@ -1,0 +1,18 @@
+Algunos servicios de AWS:
+EC2:
+S3:
+RDS:
+Lambda:
+
+
+nano <file_name.yml>: editor de consola de Linux. Crea un archivo con el nombre indicado.
+	consola de AWS basada en Linux.
+cat <file_name>: ver el archivo
+ctrl + o: guarda la información
+ctrl + x: sale del modo de edición.
+ls: lista los archivos dentro de la ubicación del directorio.
+kubectl apply -f <name_pod>: crea y sube el pod a AWS dentro de la consola.
+kubectl get pods: obtener todos los pods corriendo
+kubectl get pods -o wide: muestra los pods corriendo con direcciones IP
+kubectl get svc: muestra las apps creadas.
+kubectl describe svc <name_file>: da la información del pod/deploy

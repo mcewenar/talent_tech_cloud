@@ -62,6 +62,10 @@
 	exit
 26. Prender un contenedor:
 	docker start <name o hash del contenedor>
+27. Compila, (re)crea, inicia y asocia a contenedores para un  o varios servicios:
+	docker compose up
+	
+
 
 27 y 28. CÓMO SUBIR UNA IMAGEN A DOCKERHUB:
 You need to tag your image correctly first with your registryhost:
