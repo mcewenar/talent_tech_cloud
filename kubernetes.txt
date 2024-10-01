@@ -6,6 +6,8 @@ Kubernetes tiene la habilidad de que si falla un pod,
 	Entonces, si se quiere eliminar, primero hay
 	que eliminar el deployment y luego los pods.
 
+Apps need to be wrapped in Pods to run on Kubernetes
+
 
 No confundir on-demand vs. on-premise.
 
@@ -71,6 +73,10 @@ Kubernetes components:
 
 Kubernates basic commands: 
 	-kubectl get pods: list all pods.
+	-kubectl explain pod.spec.restartPolicy: drills into the Pod restartPolicy attribute.
+	-kubectl config view: command to view your kubeconfig
+	-kubectl explain pods --recursive: shows a complete list of Pod attributes and returns over 1,000 lines.
+	-kubectl config current-context: to see current context
 	-kubectl create -f <file>: create sources from a file.
 	-kubectl apply -f <pod_name>: create a pod and run it. 
 			Example: kubectl apply -f pod2.yml
