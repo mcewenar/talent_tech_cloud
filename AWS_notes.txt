@@ -1,3 +1,7 @@
+Settings AWS credentials: 
+AWS configure
+
+
 Algunos servicios de AWS:
 EC2:
 S3:

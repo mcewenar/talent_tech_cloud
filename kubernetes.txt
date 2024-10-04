@@ -264,3 +264,7 @@ spec:
     protocol: TCP
   selector:
     app: hello-world
+
+
+Liveness sirve para que kubernetes verifique si tu pod está vivo.
+Readiness sirve para que kubernetes verifique que tu pod está listo para recibir tráfico.
