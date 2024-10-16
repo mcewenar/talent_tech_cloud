@@ -64,6 +64,7 @@
 	docker start <name o hash del contenedor>
 27. Compila, (re)crea, inicia y asocia a contenedores para un  o varios servicios:
 	docker compose up
+
 	
 
 
@@ -81,6 +82,9 @@ You need to tag your image correctly first with your registryhost:
 29. crear un contenedor y correrlo en un puerto:
 docker run -dit --name <NombreContenedorACreAr> -p 8080:8080 <NombreDeLaImagen>
 30. Delete images:  
+
+30. Pull and run an images:
+	docker run <official_image>:<version>
 
 
 

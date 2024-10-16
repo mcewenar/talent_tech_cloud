@@ -20,3 +20,125 @@ kubectl get pods: obtener todos los pods corriendo
 kubectl get pods -o wide: muestra los pods corriendo con direcciones IP
 kubectl get svc: muestra las apps creadas.
 kubectl describe svc <name_file>: da la información del pod/deploy
+
+
+CURSO AWS:
+
+¿qué es la arquitectura en la nube? La arquitectura en la 
+nube es la práctica de aplicar características de la nube a 
+una solución que usa servicios 
+y funciones de nube para satisfacer las necesidades técnicas de 
+una organización y los casos prácticos empresariales. Una solución es 
+similar a un plano de un edificio.Los sistemas de software requieren que 
+los arquitectos administren su tamaño y complejidad. Arquitectos de nube:
+•Interactúan con los responsables de la toma de decisiones para identificar 
+Los objetivos de negocios y las capacidades que necesitan mejorar. 
+•Se aseguran de que haya una alineación entre las entregas de tecnología de una 
+solución y los objetivos de negocio.•Trabajan con los equipos de entrega que están 
+implementando la solución para asegurarse de que las funciones tecnológicas 
+sean adecuadas. Los sistemas con una buena arquitectura aumentan las 
+probabilidades de que las entregas de tecnología ayuden a satisfacer los 
+objetivos de negocio.
+
+
+La arquitectura en la nube es la práctica de aplicar características de la nube a una solución que usa servicios y funciones de nube para satisfacer las necesidades 
+técnicas de una organización y los casos prácticos empresariales
+•Puede usar los servicios de AWS para crear arquitecturas altamente disponibles, que sean escalables y 
+fiablesLos puntos clave de esta sección del módulo incluyen:
+•La arquitectura en la nube es la práctica de aplicar características de la nube a una solución que usa servicios y 
+funciones de nube para satisfacer las necesidades técnicas de una organización y los casos prácticos empresariales
+•Puede usar los servicios de AWS para crear arquitecturas 
+altamente disponibles, que sean escalables y fiablesAWS Training and Certification Módulo 2:
+
+
+El Marco de AWS Well-Architected es una guía que ofrece un enfoque coherente para evaluar las arquitecturas de la nube y orientación para ayudar a implementar diseños. 
+Documenta una serie de preguntas básicas y prácticas recomendadas que le permiten comprender si una arquitectura determinada está bien alineada con las prácticas recomendadas de la nube. 
+AWS desarrolló este marco tras revisar las arquitecturas de miles de clientes en AWS.El Marco de AWS Well-Architected se organiza enseis pilares: excelencia operativa, 
+seguridad, fiabilidad, eficacia del rendimiento, optimización de costos y sostenibilidad. Los primeros cinco pilares han sido parte del marco desde 
+la introducción del marco el año 2015. El pilar de sostenibilidad se agregó como el sexto pilar el año 2021 para ayudar a las organizaciones a aprender a minimizar el impacto ambiental 
+de ejecutar cargas de trabajo en la nube.AWS Training and Certification Módulo 2: Presentación de la arquitectura en la nube.
+
+Cuando considere el rendimiento, es deseable maximizar su rendimiento mediante el uso eficiente de recursos de computación. También es deseable que mantenga esa eficiencia a 
+medida que cambie la demanda.Igualmente, es importante democratizar las tecnologías avanzadas. En situaciones en las que le resulte difícil implementar la tecnología usted mismo, 
+considere recurrir a un proveedor. Al implementar la tecnología por usted, el proveedor se hace cargo de la complejidad y el conocimiento, con lo que libera a su equipo 
+para concentrarse en trabajo de más valor agregado.La compatibilidad mecánicaocurre cuando utiliza una herramienta o un sistema con conocimientos sobre cómo funciona mejor. 
+Utilice el enfoque tecnológico que se adapte mejor a lo que intenta lograr. Por ejemplo, tenga en cuenta los patrones de acceso a los datos cuando seleccione los enfoques de 
+base de datos o de almacenamiento.Para obtener más información sobre las prácticas recomendadas de rendimiento, consulte el documento técnico sobre la eficiencia del rendimiento.
+
+El pilar de fiabilidad aborda la capacidad de un sistema para recuperarse de errores en la infraestructura o interrupciones de servicio y adquirir de manera dinámica 
+recursos de cómputo para satisfacer la demanda. También aborda la capacidad de un sistema para mitigar las interrupciones como errores de configuración o problemas 
+transitorios de la red. Puede ser difícil asegurar la fiabilidad en un entorno tradicional. Los problemas surgen de puntos únicos de error, la falta de automatización y 
+la falta de elasticidad. Al aplicar las prácticas recomendadas descritas en el pilar de fiabilidad, puede prevenir muchos de estos problemas. Le servirá de ayuda a usted y 
+sus clientes tener una arquitectura diseñada adecuadamente con respecto a la alta disponibilidad, la tolerancia a errores y la redundancia general.Para obtener más información 
+sobre las prácticas recomendadas de fiabilidad, consulte el documento técnico sobre el pilar de fiabilidad.
+
+
+La optimización de costos es un requisito permanente de cualquier buen diseño de arquitectura. El proceso es iterativo y debe perfeccionarse y mejorarse a lo largo 
+del ciclo de vida de producción. Comprender el grado de eficiencia de su arquitectura actual en relación con sus objetivos puede eliminar gastos innecesarios. 
+Considere usar servicios administrados, porque operan a escala de la nube y pueden ofrecer un menor costo por transacción o servicio.Para obtener más información, 
+consulte el documento técnico sobre optimización de costos.
+
+El pilar de sostenibilidad aborda la capacidad para crear arquitecturas que maximicen la eficiencia y reduzcan el desperdicio.La sostenibilidad en la nube es un esfuerzo continuo 
+centrado principalmente en la reducción y eficiencia energéticas en todos los componentes de una carga de trabajo al lograr el máximo beneficio de los recursos aprovisionados y 
+minimizar los recursos totales requeridos. Este esfuerzo puede incluir lo siguiente: selección inicial de un lenguaje de programación eficiente, adopción de algoritmos modernos, 
+uso de técnicas de almacenamiento de datos eficiente, implementación de infraestructura de cómputo eficiente y del tamaño adecuado, y reducción al mínimo de requisitos de hardware 
+para usuario final de alta potencia.Para obtener más información sobre los principios de diseño de sostenibilidad en la nube, consulte el documento técnico Sustainability Pillar: 
+AWS Well-Architected Framework(Pilar de sostenibilidad: Marco de AWS Well-Architected) en 
+https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sustainability-pillar.html
+
+La Herramienta de AWS Well-Architected:
+
+Ayuda a revisar el estado de las cargas de trabajo y las compara con las prácticas recomendadas más recientes de AWS en el ámbito de la arquitectura.
+•Le permite acceder a los conocimientos y a las prácticas recomendadas que utilizan los arquitectos de AWS, cuando lo necesite.
+•Proporciona un plan de acción con una orientación paso a paso sobre cómo crear mejores cargas de trabajo para la nube.
+•Proporciona un proceso coherente para que revise y mida sus arquitecturas en la nube.
+
+A medida que diseña una solución, piense detenidamente en las compensaciones para que pueda seleccionar un enfoque óptimo. Por ejemplo, podría cambiar la consistencia, 
+la durabilidad y el espacio por el tiempo y la latencia para ofrecer un rendimiento más alto. O bien, podría priorizar la velocidad de comercialización por sobre el costo.
+Las compensaciones pueden aumentar el costo y la complejidad de su arquitectura, por lo que las decisiones de diseño deben basarse en datos empíricos. Por ejemplo, 
+podría tener que realizar pruebas de carga para asegurarse de obtener un beneficio medible del rendimiento. O bien, podría tener que realizar análisis comparativos para lograr, 
+con el tiempo, la carga de trabajo con los mejores costos. Cuando evalúe las mejoras relacionadas con el rendimiento, también es deseable que considere de qué manera sus elecciones 
+de diseño de arquitectura afectarán a sus clientes y las eficiencias de las cargas de trabajo. En esta sección, conocerá las prácticas recomendadas para el diseño de soluciones en AWS. 
+También conocerá las prácticas no recomendadas (o los malos diseños de soluciones) que debe evitar.
+
+
+Cuando ejecuta sus cargas de trabajo en la nube de AWS, puede escalar su infraestructura con rapidez y de manera proactiva. 
+Asegúrese de implementar la escalabilidad en cada capa de su infraestructura.Para comprender la importancia de la escalabilidad, 
+considere estas prácticas no recomendadas, donde el escalado se hace de manera reactiva y manual. En esta situación, cuando los servidores de aplicaciones alcanzan su capacidad total, 
+se impide a los usuarios acceder a la aplicación. Luego, los administradores lanzarán manualmente una o más instancias nuevas para administrar la carga. 
+Lamentablemente, se requieren algunos minutos para que la instancia esté disponible para uso después de lanzarla. Eso aumenta el tiempo en que los usuarios no pueden acceder 
+a la aplicación.
+
+Cuando se activa una alarma, Amazon EC2 Auto Scaling lanza de inmediato una nueva instancia. De este modo, esa instancia está lista antes de que se alcance el máximo de la capacidad, 
+lo que ofrece una experiencia sin interrupciones para los usuarios.Idealmente, también debe diseñar su sistema para que haga una reducción horizontalcuando la demanda disminuya y usted 
+no ejecute (y pague) instancias que ya no necesita.©2022, Amazon Web Services, Inc. o sus filiales. Todos los derechos reservados.241. Habilite la escalabilidad (2 de 2)
+Asegúrese de que su arquitectura pueda manejar los cambios en la demanda.Práctica recomendadaServidores de aplicaciones en el umbral de alarmaAmazon EC2 Auto Scaling recibe la alerta 
+y escala horizontalmenteEl nuevo servidor está listo antes de que se alcance la capacidad totalLos usuarios nunca experimentan una interrupción del servicioAWS Training and 
+Certification Módulo 2: Presentación de la arquitectura en la nube.
+
+Las infraestructuras tradicionales se basan en cadenas de servidores estrechamente integrados, cada uno con un propósito específico. El problema es que cuando uno de esos componentes o 
+capas deja de funcionar, la interrupción del sistema puede ser crítica. También impide el escalado. Si agrega o quita servidores en una capa, también debe conectar todos los servidores 
+de cada capa de conexión. El ejemplo de la izquierda muestra un conjunto de servidores web y de aplicaciones que están estrechamente acoplados. Si un servidor de aplicaciones deja de 
+funcionar, se producirá un error porque los servidores web intentarán conectarse a él sin éxito.Con el acoplamiento débil, utiliza soluciones administradas como intermediarios entre 
+las capas de su sistema. Con este diseño, el intermediario automáticamente maneja ambos errores y el escalado de los componentes o las capas. El ejemplo de la derecha muestra un 
+equilibrador de carga (en este caso, un equilibrador de carga de Elastic Load Balancing) que enruta las solicitudes entre los servidores web y los servidores de aplicaciones. 
+Si un servidor de aplicaciones deja de funcionar, el equilibrador de carga automáticamente comenzará a dirigir todo el tráfico a los dos servidores en buen estado.Dos soluciones 
+primarias para desacoplar los componentes son los equilibradores de cargay las colas de mensajes.
+
+
+
+La siguiente práctica recomendada es diseñar servicios, no servidores. Aunque Amazon Elastic Compute Cloud (Amazon EC2) ofrece una enorme flexibilidad para diseñar y configurar 
+su solución, no siempre debe ser la primera (o la única) solución que utiliza para cada necesidad. En algunos casos, los contenedores o una solución sin servidor podrían ser más adecuados. 
+Por lo tanto, es importante considerar que cuáles son sus necesidades y cuál solución es adecuada.Con las soluciones sin servidor y los servicios administrados de AWS, 
+no se necesita aprovisionar, configurar y administrar toda una instancia de Amazon EC2. Las soluciones administradas que tienen un perfil más bajo y un mejor rendimiento pueden reemplazar 
+las soluciones basadas en servidor por un menor costo. Algunos ejemplos son AWS Lambda, Amazon Simple Queue Service (Amazon SQS), Amazon DynamoDB, Elastic Load Balancing, Amazon Simple 
+Email Service (Amazon SES) y Amazon Cognito.
+
+
+Cuando sea posible, elimine los puntos únicos de error de su arquitectura. Esto no quiere decir que no debe duplicar siempre cada componente. 
+Dependiendo de sus acuerdos de nivel de servicio (SLA, Service-Level Agreement) de tiempo de inactividad, puede usar soluciones automatizadas que solo inician 
+componentes cuando es necesario. También puede usar un servicio administrado, donde AWS reemplaza de automáticamente el hardware defectuoso subyacente por usted.
+Este sistema simple muestra dos servidores de aplicaciones conectados a un único servidor de base de datos. El servidor de base de datos representa un punto único de error y 
+se debe evitar. Cuando deja de funcionar, los servidores de aplicaciones también dejan de hacerlo. Los servidores de aplicaciones deben seguir funcionando incluso en caso de falla, 
+eliminación o sustitución del hardware físico subyacente.
+
