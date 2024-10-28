@@ -24,6 +24,9 @@ kubectl describe svc <name_file>: da la información del pod/deploy
 
 CURSO AWS:
 
+
+
+MÓDULO 2:
 ¿qué es la arquitectura en la nube? La arquitectura en la 
 nube es la práctica de aplicar características de la nube a 
 una solución que usa servicios 
@@ -142,3 +145,236 @@ Este sistema simple muestra dos servidores de aplicaciones conectados a un únic
 se debe evitar. Cuando deja de funcionar, los servidores de aplicaciones también dejan de hacerlo. Los servidores de aplicaciones deben seguir funcionando incluso en caso de falla, 
 eliminación o sustitución del hardware físico subyacente.
 
+
+Una forma común de evitar los puntos únicos de error es crear un servidor de base de datos secundario (en espera) y replicar los datos. De este modo, 
+si el servidor de base de datos principal se desconecta, el servidor secundario puede asumir la carga. En este ejemplo, cuando la base de datos principal se desconecta, 
+los servidores de aplicaciones envían automáticamente sus solicitudes a la base de datos secundaria. Este ejemplo también ilustra la práctica recomendada 3: trate los 
+recursos como desechables y diseñe sus aplicaciones para que admitan cambios en el hardware.
+
+El cómputo en la nube le permite cambiar los gastos de capital por los gastos variables. Los gastos de capital (CapEx)son fondos que utiliza una empresa para adquirir, 
+actualizar y mantener activos físicos como bienes, edificios industriales o equipos. Según este modelo, usted paga por los servidores en el centro de datos, 
+estén o no activos. Por el contrario,los servicios de AWS usan un modelo de costos de gastos variables, lo que significa que solo paga por los servicios individuales que necesita, 
+por el tiempo que los utilice. En cada servicio, puede optimizar el costo. Muchos servicios ofrecen diferentes niveles de precios, modelos o configuraciones.Tenga en 
+cuenta que puede ser muy costoso replicar una configuración de centro de datos en las instalaciones de servidores que se ejecutan 24x7 en la nube. Por lo tanto, la mejor manera 
+de construir su infraestructura, desde la perspectiva del costo, es aprovisionar únicamente los recursos que necesita y detener los servicios cuando no se utilicen.
+
+
+El almacenamiento en cachées una técnica para hacer futuras solicitudes con más rapidez y reducir el rendimiento de la red almacenando 
+temporalmente los datos en una ubicación intermedia entre el solicitante y el almacenamiento permanente.En el ejemplo de prácticas no recomendadas, 
+no se utilizó ningún servicio de almacenamiento en caché. Cuando alguien solicita un archivos de uno de los buckets de Amazon Simple Storage Service (Amazon S3), 
+cada solicitud tarda la misma cantidad de tiempo en completarse y cada solicitud tiene el mismo costo.En el ejemplo de prácticas recomendadas, la infraestructura usa Amazon 
+CloudFront antes de Amazon S3 para ofrecer almacenamiento en caché. En esta situación, la solicitud inicial busca el archivo en Amazon CloudFront. Si no lo encuentra, CloudFront 
+solicita el archivo a Amazon S3. Después, CloudFront almacena una copia del archivo en una ubicación perimetral cerca del usuario y envía una copia al usuario que hizo la solicitud. 
+Las solicitudes posteriores del archivo se recuperan desde la (ahora más cercana) ubicación perimetral en CloudFront en lugar de Amazon S3. Esto reduce la latencia yel costo porque, 
+después de la primera solicitud, ya no debe pagar por la transferencia del archivo desde Amazon S3.©2022, Amazon Web Services, Inc. o sus filiales. Todos los derechos reservados.339. 
+Use el almacenamiento en cachéEl almacenamiento en caché minimiza las operaciones de recuperación de datos redundantes, lo que mejora el rendimiento y el costo.Práctica 
+no recomendadaTres solicitudes de latencia y costo iguales.Bucketde S3 con datosPráctica recomendadaLa segunda, 
+tercera y enésima solicitudes tienen menores latencia y costo.Bucketde S3 con datosAlmacenamiento en caché con Amazon CloudFrontAWS Training and Certification Módulo 2: 
+Presentación de la arquitectura en la nube © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 36
+
+La infraestructura de la nube de AWS se basa en regiones. AWS cuenta con 22regiones en todo el mundo. Una región de AWS es una ubicación geográfica 
+física con dos o más zonas de disponibilidad. Las zonas de disponibilidad, a su vez, constan de uno o más centros de datos.Las regiones de AWS están conectadas con varios proveedores 
+de servicios de Internet (ISP, Internet Service Provider). Las regiones también están conectadas a una red troncal global privada, que proporciona un menor costo y una mayor 
+uniformidad en la latencia de red entre regiones en comparación con la Internet pública.Las regiones de AWS que se establecieron antes del 20de marzo de2019 están habilitadasde forma 
+predeterminada. Las regiones que se establecieron después del 20de marzo de2019, como Asia-Pacífico (Hong Kong) y Medio Oriente (Baréin), están deshabilitadasde forma predeterminada. 
+Debe habilitar estas regiones para poder usarlas. Puede utilizar la Consola de administración de AWS para habilitar o deshabilitar una región. Algunas regiones tienen acceso restringido. 
+Una cuenta de AWS (China) solo proporciona acceso a las regiones de Pekín y Ningxia. Para obtener más información sobre AWS en China, consulte la página de AWS en China. La región aislada 
+AWS GovCloud (EE.UU.) está diseñada para permitir a los organismos gubernamentales y a los clientes de EE.UU. transferir a la nube cargas de trabajo confidenciales y cumplir 
+con sus requisitos normativos y de cumplimiento específicos. Para obtener tolerancia a errores y estabilidad, las regiones están aisladas unas de otras. Los recursos en una región 
+no se replican automáticamente en otras regiones. Cuando almacena datos en una región específica, 
+no se replica fuera de esa región. Si las necesidades del negocio así lo requieren, es su responsabilidad replicar los datos en las regiones. AWS ofrece información sobre el país 
+y, si corresponde, sobre el estado donde reside cada región. Usted es responsable de seleccionar la región donde debe almacenar los datos, en función de los requisitos de cumplimiento 
+y latencia de red.
+
+Cada región de AWS tiene dos o más ubicaciones aisladas, conocidas como zonas de disponibilidad. Cada zona de disponibilidad abarca uno o más centros de datos, 
+con algunas zonas de disponibilidad que tienen hasta seis centros de datos. Sin embargo, ningún centro de datos puede ser parte de dos zonas de disponibilidad.
+Cada zona de disponibilidad está diseñada para constituir una zona de error independiente. Eso significa que las zonas de disponibilidad se encuentran separadas 
+físicamente dentro de una región metropolitana típica. También se encuentran en llanuras con menor riesgo de inundación (la clasificación específica de las zonas de 
+inundación varía según la región). Además de tener un suministro eléctrico ininterrumpido discreto e instalaciones de generación de energía de respaldo en el lugar, 
+la alimentación proviene de redes eléctricas diferentes de empresas independientes de servicios públicos para reducir aún más los puntos únicos de error. Las zonas de 
+disponibilidad están conectadas de forma redundante a varios proveedores de tránsito de nivel1.Una zona de disponibilidad es el nivel más granular de especificación que 
+se puede hacer para algunos servicios, como Amazon EC2.Usted es responsable de seleccionar las zonas de disponibilidad donde se encontrarán los sistemas. Los sistemas pueden 
+abarcar varias zonas de disponibilidad. Debe diseñar los sistemas para que sobrevivan a un error temporal o prolongado de una zona de disponibilidad si ocurre un desastre. 
+La distribución 
+de las aplicaciones en varias zonas de disponibilidad les permite mantenerse resistentes en la mayoría de las situaciones de error, incluidos los desastres naturales o errores de sistema.
+
+
+La base de la infraestructura de AWS son los centros de datos. Usted no especifica un centro de datos para la implementación de recursos. 
+Sin embargo, un centro de datos es la ubicación donde residen los datos reales. Amazon opera centros de datos de vanguardia de alta disponibilidad. 
+Aunque es poco frecuente, pueden ocurrir fallas que afecten la disponibilidad de las instancias que están en la misma ubicación. 
+Si aloja todas las instancias en una misma ubicación y se produce una falla en ella, ninguna de las instancias estará disponible.
+Todos los centros de datos se encuentran en línea y a disposición de los clientes. Si se produce un error, los procesos automatizados redirigen el tráfico de datos 
+de los clientes fuera del área afectada. Las aplicaciones principales se implementan en una configuración N+1, de modo que, si se produce un error en un centro de datos, 
+hay suficiente capacidad para poder equilibrar la carga del tráfico hacia los sitios restantes.AWS utiliza equipos de red personalizados provenientes de varios original 
+device manufacturers (ODM, fabricantes de dispositivos originales). Los ODM diseñan y fabrican productos en función de las especificaciones de una segunda empresa. Luego, 
+la segunda empresa cambia la marca de los productos para la venta.
+
+
+Para entregar contenido a los usuarios finales con menor latencia, Amazon CloudFront utiliza una red global que incluye más de 200puntos de presencia que se componen de ubicaciones 
+perimetrales y cachés perimetrales regionales. Las ubicaciones perimetrales se encuentran en América del Norte, Europa, Asia, Australia, América del Sur, el Medio Oriente, África y China. 
+Las ubicaciones perimetrales admiten servicios de AWS, como AmazonRoute 53 y AmazonCloudFront.Las cachés perimetrales regionales se utilizan de forma con Amazon CloudFront. 
+Se utilizan cuando tiene contenido al que no se accede con la frecuencia suficiente para que permanezca en una ubicación perimetral. Las cachés perimetrales 
+regionales absorben este contenido y proporcionan una alternativa a recuperar ese contenido del servidor de origen.Para obtener más información sobre la infraestructura 
+de Amazon CloudFront, consulte lainfraestructura de 
+Amazon CloudFront infrastructureenhttps://aws.amazon.com/cloudfront/features/?whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc#Amazon_CloudFront_InfrastructureAWS 
+Training and Certification Módulo 2: Presentación de la arquitectura en la nube © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 46 
+
+
+Los puntos clave de esta sección del módulo incluyen:
+•La infraestructura global de AWS consta de regiones y zonas de disponibilidad
+•La elección de una región suele basarse en los requisitos de cumplimiento o en reducir la latencia
+•Cada zona de disponibilidad se encuentra separada de forma física de otras zonas de disponibilidad y tiene alimentación, redes y conectividad redundantes
+•Las ubicaciones perimetrales y las cachés perimetrales regionales mejoran el rendimiento al almacenar en caché el contenido más 
+cerca de los usuariosAWS Training and Certification Módulo 2: 
+Presentación de la arquitectura en la nube © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 47 
+
+
+MÓDULO 3:
+
+Amazon S3 es un servicio de almacenamiento de objetos. Le permite almacenar cantidades casi ilimitadas de datos. Los archivos de datos se almacenan como objetos. 
+Coloca los objetos en un bucket, que usted define. Cada bucketdebe tener un nombre que sea globalmente único entre las regiones. 
+Esto significa que el nombre del buckettiene que ser único entre todas las cuentas de clientes de AWS. Los objetos que almacena pueden cariar de tamaño de 0bytes a 5TB. 
+Aunque los objetos individuales no pueden superar los 5TB, puede almacenar la cantidad total de datos que necesite.Cada objeto tiene cinco características consistentes. Primero, 
+tiene una clave, que es el nombre que le asigna a un objeto. La clave del objeto se usa para recuperar el objeto. En la Consola de administración de AWS, puede crear un directorio 
+dentro de un buckety cargar un objeto en ese directorio. Sin embargo, en la realidad, Amazon S3 no conoce los directorios, por lo que el valor de clave incluye la ruta completa a 
+la raíz del bucket. Los objetos también incluyen un ID de versión. En un bucket, una clave y un ID de versión identifican un objeto de forma única. Aprenderá más sobre el control 
+de versiones más adelante en este módulo.El valor del objeto es el contenido real que almacena. Puede ser una secuencia de bytes. Los valores del objeto son inmutables, es decir 
+que después de que carga un objeto, no puede modificar el valor. Si desea modificar el objeto, debe hacer un cambio.
+fuera de Amazon S3 y volver a cargar el objeto.Los objetos también incluyen metadatos, que es un conjunto de pares de nombre-valor que puede usar para almacenar 
+información sobre el objeto. Puede asignar metadatos, los que se denominan metadatos definidos por el usuario, a sus objetos en Amazon S3. 
+Amazon S3 también asigna metadatos del sistema a estos objetos, que utiliza para administrar objetos. Por último, Amazon S3 también usa subrecursospara almacenar información adicional 
+específica del objeto.8AWS Training and Certification Módulo 3: Incorporación de una capa de almacenamiento © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. 
+Todos los derechos reservados. 13 
+
+Amazon S3 ofrece muchas funciones que lo hacen un componente importante de muchas soluciones creadas en AWS.En primer lugar, ofrece durabilidad, que describe el promedio de la 
+pérdida anual prevista de objetos. Once nueves de durabilidad significa que cada año, hay un 0,000000001 por ciento de 
+probabilidad de perder un objeto. Por ejemplo, si almacena 10000 objetos con Amazon S3, puede esperar una pérdida de un solo objeto cada 10000000 años en promedio. 
+Amazon S3 almacena de forma redundante sus objetos en varios dispositivos en múltiples instalaciones en la región de Amazon S3 que designe. 
+Amazon S3 está diseñado para sostener errores de dispositivos simultáneos detectando con rapidez y reparando cualquier redundancia perdida. 
+Amazon S3 también verifica con regularidad la integridad de sus datos mediante sumas de verificación.Amazon S3 también ofrece cuatro nueves (o 99,99 por ciento) 
+de disponibilidad. La disponibilidad se refiere a su capacidad de acceder a los datos con rapidez, cuando lo desee. También ofrece una capacidad casi ilimitada 
+para almacenar sus datos, por lo que es escalable. Amazon S3 tiene una configuración de seguridadrobusta. Ofrece muchas maneras de controlar 
+el acceso a los datos que almacena y también le permite cifrar los datos.
+
+Por último, Amazon S3 tiene un alto rendimiento, con una latencia hasta el primer byte que se mide en milisegundos para la mayoría de las clases de almacenamiento. 
+Para obtener más información sobre los patrones de diseño de rendimiento de S3, consulte la documentación de Amazon S3. Los enfoques comunes incluyen usar el almacenamiento en 
+caché para contenido de acceso frecuente; lógica configurable de reintentos y tiempo de espera para objetos que reciben un significativo tráfico de solicitudes en un período breve; 
+y escalado horizontal y paralelización de solicitudes para obtener un alto rendimiento en toda la red.
+
+
+Una situación de uso común de Amazon S3 es utilizarlo para el alojamiento de medios. En este caso práctico, Amazon S3 se usa para almacenar y distribuir videos, fotos, 
+archivos de música y otros medios. Este contenido se puede entregar directamente desde Amazon S3 porque cada objeto en Amazon S3 tiene una URL HTTP única. Como alternativa, 
+Amazon S3 puede actuar como un almacén de origen para una red de entrega de contenido (CDN), como Amazon CloudFront. La elasticidad de Amazon S3 lo hace ideal para alojar 
+contenido web que necesita ancho de banda para dar respuesta a los picos extremos de demanda. Además, como no necesita aprovisionar almacenamiento para Amazon S3, 
+funciona bien para sitios web de rápido crecimiento que alojan contenido de uso intensivo de datos generado por el usuario, como sitios de uso compartido de videos o fotos.
+AWS Training and Certification Módulo 3: Incorporación de una capa de almacenamiento © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 17 
+
+
+
+De forma predeterminada, todos los bucketsde S3 son privados y solo pueden acceder a ellos los usuarios a los que se ha concedido acceso explícitamente. 
+Es esencial que administre y controle el acceso a los datos de Amazon S3. AWS ofrece muchas herramientas y opciones para controlar el 
+acceso a sus bucketsde S3 u objetos, como:•Usar el bloqueo del acceso público de Amazon S3. Esta configuración anula otras políticas o permisos de objetos. 
+Habilite el bloqueo del acceso público para todos los bucketsque no desee que sean de acceso público. Esta función ofrece un método sencillo de evitar la 
+exposición no intencional de datos de Amazon S3.•Escribir políticas de AWS Identityand Access Management (AWS IAM) que especifiquen los usuarios o roles 
+que pueden acceder a bucketsy objetos específicos. •Escribir políticas de bucketque definan el acceso a bucketsu objetos específicos. Esta opción se usa 
+habitualmente cuando el usuario o sistema no puede autenticarse mediante IAM. Se pueden configurar políticas de bucketpara otorgar acceso entre cuentas de 
+AWS o para otorgar acceso público o anónimo a los datos de Amazon S3. Si se usan políticas de bucket, deben escribirse con cuidado y probarse completamente. 
+Puede especificar un enunciado de denegación en una política de bucketpara restringir el acceso. El acceso se restringirá incluso si los usuarios tienen 
+permisos que se otorgan en una política basada en identidad adjunta a los usuarios.•Crear puntos de acceso de S3. Los puntos de acceso son nombres de host 
+únicos que aplican permisos y controles de red distintos para solicitudes que se realizan a través de esos puntos. Los clientes con conjuntos de datos compartidos 
+pueden escalar el acceso para muchas aplicaciones creando puntos de acceso individualizados con
+nombres y permisos personalizados para cada aplicación. •Configurar listas de control de acceso (ACL) en sus bucketsy objetos. Las ACL se usan con menos frecuencia 
+(las ACL son anteriores a IAM). Si usa ACL, no configure un acceso que sea demasiado abierto o permisivo.•AWS TrustedAdvisorofrece una función de comprobación de permisos de bucket. 
+Es una herramienta útil para descubrir si cualquiera de los bucketsen su cuenta tiene permisos que otorgan acceso global.
+
+Hay tres enfoques generales diferentes para configurar el acceso a los objetos en un bucketde S3.La situación de la izquierda muestra la configuración de seguridad 
+predeterminada de Amazon S3. De forma predeterminada, los bucketsde Amazon S3 y los objetos almacenados en ellos son privados (están protegidos). 
+Las únicas entidades con acceso a un bucketrecién creado sin modificar son el administrador de la cuenta y el usuario raíz de la cuenta de AWS.
+El propietario del recurso puede otorgar permisos de acceso específicos a otros, pero a quienes no se les hayan concedido esos permisos no tendrán acceso.
+La situación del medio muestra una ocasión en que se ha desactivado la configuración de seguridad de S3 y cualquiera puede acceder públicamente a los objetos almacenados en el bucket. 
+¡Precaución! Usar un bucketde Amazon S3 para alojar un sitio web estático es un ejemplo de cómo configurar una arquitectura de AWS rápidamente. Sin embargo, 
+para la mayoría de los casos prácticos de Amazon S3, no es recomendable otorgar acceso público a Amazon S3.En la mayoría de los casos prácticos, 
+no se requiere acceso público.Con más frecuencia, Amazon S3 se usa para almacenar datos utilizados por una aplicación que se ejecuta fuera de Amazon S3, 
+o para respaldar información confidencial. Para estos casos prácticos comunes, nunca se debe otorgar acceso público a los bucketsque contienen los datos.
+
+La situación de la derecha muestra un caso en que se configuró Amazon S3 para proporcionar acceso controlado. Al Usuario A se le otorgó acceso a los objetos en el bucket, 
+pero al Usuario B se le denegó el acceso. Las situaciones de acceso controlado son frecuentes. Las puede configurar el propietario del bucketmediante una o más de las herramientas 
+o las opciones para controlar el acceso a los datos de Amazon S3 que se analizaron anteriormente en este módulo
+
+Cuando configura la opción de cifrado Predeterminado de un bucket, se habilita el cifrado del lado del servidor. Con esta función, Amazon S3 cifra su objeto antes de guardarlo en el disco.
+ Luego, Amazon S3 los descifrará cuando usted descargue el objeto. El cifrado del cliente es la otra opción. Cuando usa este enfoque, 
+cifra los datos en el lado del cliente antes de cargarlo en Amazon S3. En este caso, administra el proceso de cifrado, las claves de cifrado y las herramientas relacionadas. 
+Al igual que el cifrado del lado del servidor, el cifrado del cliente puede reducir el riesgo cifrando los datos con una clave que se almacena en un mecanismo diferente que 
+el mecanismo que almacena los datos en sí.
+
+Un segundo caso práctico de Amazon S3 es utilizar el servicio para alojar un sitio web estático. En un sitio web estático, las páginas web individuales incluyen contenido estático. 
+También pueden incluir scripts del lado del cliente. Por el contrario, un sitio web dinámicodepende del procesamiento del lado del servidor, 
+que podría implicar consultas de la base de datos que se ejecutan en respuesta a los scripts del lado del servidor, como PHP, JSP o ASP.NET. 
+AmazonS3 no admite con el scripting del lado del servidor. Sin embargo, AWS ofrece otros servicios que le permiten alojar sitios web dinámicos.
+Para alojar un sitio web estático, configure un bucketde S3 para alojamiento de sitios web. Luego, cargue el contenido de su sitio web en el bucket. 
+El ejemplo muestra que el sitio estático podría consistir en archivos HTML, imágenes, videos y scripts del cliente en formatos como JavaScript.
+Con este enfoque, no necesita ejecutar una máquina virtual que aloje un servidor web. De hecho, no necesita ejecutar un servidor. Sin embargo, igualmente puede alojar un sitio web. 
+Amazon S3 proporciona una solución de bajo costo para alojamiento web que incluye alto rendimiento, escalabilidad y disponibilidad.
+
+El uso compartido de recursos entre orígenes (CORS) define una forma para que las aplicaciones web del cliente que están cargadas en un dominio interactúen con los recursos en un 
+dominio distinto. Con el respaldo de CORS, puede crear aplicaciones web del lado del cliente completas con AmazonS3. Asimismo, puede permitir un acceso entre orígenes 
+a sus recursos de AmazonS3 de manera selectiva.Para configurar el bucketde modo que permita solicitudes entre orígenes, cree una configuración CORS. Una configuración CORS 
+es un documento XML con reglas que identifican: •Los orígenes a los que les permitirá acceder a su bucket.•Las operaciones (métodos HTTP) que admitirán a cada origen: En este ejemplo, 
+se permiten las solicitudes PUT, POST y DELETE desde el origenhttp://www.example.com,que se podría configurar con Amazon Route53 para que sea otro bucketde S3.
+•Otra información específica de operaciones.Para obtener más información sobre CORS, consulte la documentación de AWS sobre el uso compartido de recursos entre orígenes (CORS)
+.AWS Training and Certification Módulo 3: Incorporación de una capa de almacenamiento © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 26 
+
+
+Con Amazon S3, paga solo por lo que utiliza. No hay una tarifa mínima. Hay cuatro componentes de costo que debe considerar 
+cuando decida cuál clase de almacenamiento de Amazon S3 se ajusta mejor a su perfil de datos: precio del almacenamiento, precio de las solicitudes 
+y la recuperación de datos, precio de la transferencia de datos y la aceleración de transferencias, y precio de las funciones de administración de datos.
+Puede encontrar más información sobre los precios de Amazon S3 en Precios de Amazon S3.AWS Training and Certification Módulo 3: Incorporación de una capa de 
+almacenamiento © 2023, Amazon Web Services, Inc. o sus empresas afiliadas. Todos los derechos reservados. 40 
+
+
+AWS ofrece varias opciones de informática para satisfacer diferentes necesidades. 
+Mientras diseña la arquitectura para admitir un tipo determinado de carga de trabajo, es importante que comprenda las opciones de informática disponibles. 
+Como se muestra en el diagrama, las opciones clave de informática de tiempo de ejecución se pueden agrupar en cuatro categorías de modelos 
+informáticos en la nube: máquinas virtuales (VM); contenedores ;plataforma como servicio, que también se conoce como PaaS; y sin servidor. 
+Además, puede utilizar soluciones especializadas para abordar los casos de uso de informática específicos.En la categoría máquinas virtuales, 
+AWS ofrece dosservicios principales. El primer servicio es Amazon ElasticCompute Cloud (Amazon EC2).Proporciona servidores virtuales seguros y de tamaño ajustable en la nube.
+ El segundo servicio es Amazon Lightsail. Proporciona servidores privados virtuales para ejecutar cargas de trabajo sencillas de forma rentable. 
+En la categoría contenedores, AWS ofrece Amazon ElasticContainerService(Amazon ECS). Le permite ejecutar aplicaciones de contenedores de Dockeren AWS.En la categoría 
+PaaSse incluye AWS ElasticBeanstalk. Es una solución que ejecuta aplicaciones web y servicios que se desarrollan en lenguajes como Java, .NET, PHP, Node.js, Python, Ruby, 
+Goy Docker.
+
+
+En la categoría sin servidorse incluye AWSLambda, que es una solución informática sin servidor que ejecuta los códigos de Java, Go, PowerShell, Node.js, C#, Python o Ruby. 
+En esta categoría también se incluye AWS Fargate, que proporciona una plataforma de informática sin servidor para contenedores.En cuanto a las soluciones especializadas, AWS 
+Outpostsofrece una forma de ejecutar la infraestructura y los servicios de AWS en las instalaciones, y AWS Batchesun servicio que ejecuta trabajos por lotes a cualquier escala.
+Cuando seleccione un tiempo de ejecución de informática de AWS para su carga de trabajo, tenga en cuenta que las máquinas virtuales y los servicios basados en contenedores 
+proporcionan un mayor control sobre su infraestructura y permiten mayores grados de personalización. PaaSy los servicios sin servidor le permiten enfocarse más en la aplicación y 
+menos en la infraestructura. También permiten una implementación rápida. Los servicios de la categoría de soluciones especializadas abordan tipos específicos de cargas de trabajo, 
+o nube híbrida y lote. Estos servicios especializados funcionan bien para estos casos de uso, ya que AWS también los administra completamente. En este módulo, el enfoque estará en 
+Amazon EC2.Formación y certificación de AWSMódulo 4: Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los derechos reservados.13
+
+Amazon ElasticCompute Cloud (Amazon EC2) posibilita la informática en la nube. Puede utilizar Amazon EC2 para aprovisionar servidores virtuales y controlar completamente los recursos 
+informáticos de esos servidores. Puede obtener e iniciar instancias de servidor nuevas en cuestión de minutos. Puede escalar rápidamente la capacidad, ya sea aumentándola o reduciéndola, 
+en función de sus necesidades. Desde el punto de vista del costo, paga solo por la capacidad que utiliza.¿Por qué se denomina ElasticCompute Cloud?•Elastic(elástico) porque puede aumentar 
+o disminuir fácilmente la cantidad de servidores que ejecuta para admitir una aplicación de forma automática. También puede aumentar o disminuir el tamañode los servidores existentes
+•Compute(informática) porque la mayoría de los usuarios ejecutan servidores para alojar aplicaciones en ejecución o procesan datos, lo que requiere recursos de informática. 
+Estos recursos incluyen la capacidad de procesamiento (CPU) y la memoria (RAM)•Cloud(nube) porque las instancias EC2 que ejecuta se alojan en la nube
+
+
+Para aprovisionar una instancia EC2, debe tomar decisiones clave con respecto a los detalles de configuración. Los parámetros principales que debe especificar para lanzar una 
+instancia segura incluyen:•Imagen de Amazon Machine (AMI):una AMI define la configuración de software básica para una instancia y 
+Amazon EC2 la utiliza para lanzar la instancia.•Tipo de instancia:un tipo de instancia define una combinación de capacidad de CPU, memoria, almacenamiento y redes 
+que proporciona un cierto nivel de capacidad de cómputo para ejecutar una aplicación.•Selección de ubicación y direccionamiento de redes: cuando lanza una instancia, 
+puede especificar la ubicación y el direccionamiento de red adecuados para proporcionar el acceso a la red y la seguridad que desea.•Rol asumido:de forma opcional, 
+puede asociar un rol de AWS Identityand Access Management (IAM), que otorga permisos para acceder a los servicios de AWS a las aplicaciones que se ejecutan en la 
+instancia o a los usuarios conectados a la instancia.•Datos de usuario: puede inicializar o personalizar aún más la configuración de la instancia si especifica un 
+script de datos de usuario. Este script se ejecuta de forma automática cuando se lanza la instancia.
+
+Una AMI brinda la información necesaria para lanzar una instancia. Se debe especificar una AMI de origen cuando se lanza una instancia. La AMI incluye 
+una plantillapara el volumen raíz de la instancia, permisos de 
+lanzamientoy asignaciones de dispositivos de bloques.Un volumen raíz normalmente contiene un sistema operativo (SO) y todo lo que se ha instalado en ese sistema operativo 
+(las aplicaciones, las bibliotecas, las utilidades y más). Amazon EC2 copia la plantilla en el volumen raíz de la instancia nueva y, a continuación, la inicia.Los permisos de 
+lanzamientocontrolan qué cuentas de AWS puede usar la AMI para lanzar instancias. También le permiten poner la AMI a disposición del público.Las asignaciones de dispositivos de bloques 
+especifican volúmenes de almacenamiento adicionales (si los hay) para asociar a la instancia cuando se lanza.Cuando necesite varias instancias con la misma configuración, puede lanzarlas 
+desde una misma AMI.Cuando necesite instancias con distintas configuraciones, puede usar distintas AMI para lanzarlas. Por ejemplo, podría tener una AMI para implementar las instancias 
+del servidor web en su arquitectura y otra para implementar las instancias del servidor de aplicaciones.

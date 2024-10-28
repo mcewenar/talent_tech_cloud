@@ -86,6 +86,14 @@ docker run -dit --name <NombreContenedorACreAr> -p 8080:8080 <NombreDeLaImagen>
 30. Pull and run an images:
 	docker run <official_image>:<version>
 
+31: Run all servies in background defined in docker-compose.yml and leave terminal available for other commands:
+	docker-compose up -d
+
+32: see all logs meanwhile you are running services:
+	docker-compose logs -f
+
+
+
 
 
 
