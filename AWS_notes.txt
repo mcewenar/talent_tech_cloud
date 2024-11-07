@@ -378,3 +378,66 @@ lanzamientocontrolan qué cuentas de AWS puede usar la AMI para lanzar instancia
 especifican volúmenes de almacenamiento adicionales (si los hay) para asociar a la instancia cuando se lanza.Cuando necesite varias instancias con la misma configuración, puede lanzarlas 
 desde una misma AMI.Cuando necesite instancias con distintas configuraciones, puede usar distintas AMI para lanzarlas. Por ejemplo, podría tener una AMI para implementar las instancias 
 del servidor web en su arquitectura y otra para implementar las instancias del servidor de aplicaciones.
+
+
+Usted crea una AMI desde una instancia EC2. Comienza con una AMI de origen, que puede ser una AMI que ya existe, como una AMI Quick Startproporcionada por AWS. O bien, 
+puede comenzar con una AMI que cree a partir de una máquina virtual que importe. A continuación, lanza una instancia EC2 a partir de esa AMI (paso 1).Independientemente de las 
+opciones que elija (paso 1), obtendrá lo que se denomina instancia no modificada en el diagrama. A partir de esa instancia, luego puede crear una instanciadorada. En otras palabras, 
+crear una máquina virtual con la configuración específica del SO y de la aplicación que desee (paso 2). Luego, regístrela como una AMI nueva (paso 3).En el caso de una AMI con respaldo 
+de EBS, puede registrar la AMI nueva creando una imagen nuevay AWS la registra automáticamente. En el caso de una AMI con respaldo de una instancia, puede registrar la AMI nueva mediante 
+las herramientas de AMI de Amazon EC2 para crear un paquetepara el volumen raíz de la instancia y cargar el paquete en un bucketde Amazon S3. Luego, debe registrar la AMI nueva de 
+forma manual.Una vez registrada la AMI, se puede utilizar para lanzar instancias nuevas en la misma región de AWS. Ahora puede considerar la AMI nueva como una AMI de inicio nueva. 
+Si lo desea, además puede copiar la AMI en otras regiones (paso 4) para que también pueda lanzar nuevas 
+instancias EC2 en esas ubicaciones.Formación y certificación de AWSMódulo 4: Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los 
+derechos reservados.30
+
+Otra forma de crear una AMI es utilizar EC2 ImageBuilder.EC2 ImageBuilder es un servicio de AWS que simplifica la creación, el mantenimiento, la validación, 
+el uso compartido y la implementación de imágenes de Linux o Microsoft Windows. Proporciona una interfaz gráfica sencilla para producir las AMI que se utilizarán en 
+AWS y generar las imágenes de máquinas virtuales que se utilizarán en las instalaciones.Una de las ventajas de utilizar EC2 ImageBuilder es que le permite crear imágenes con 
+los componentes esenciales solamente, lo que puede reducir la exposición a puntos vulnerables de seguridad. Antes de utilizar las imágenes en producción, puede utilizar EC2 ImageBuilder 
+para validar las imágenes con las pruebas que ofrece AWS o con sus propias pruebas. Finalmente, proporciona el control de versiones para la administración de las revisiones.Formación y 
+certificación de AWSMódulo 4: Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los derechos reservados.31
+
+Para poder lanzar una instancia, debe seleccionar el tipo de instancia que quiere usar. Un tipo de instancia EC2define una configuración de características de rendimiento de CPU, memoria, almacenamiento y red. 
+Con esta configuración se obtiene un nivel de rendimiento informático dado. El tipo de instancia que elija dependerá de los requisitos de rendimiento y costo de la carga de trabajo.Los nombres de los tipos de instancia siguen 
+una convención estándar. Un nombre de tipo de instancia consta de varias partes que describen las diferentes características del tipo de instancia. Por ejemplo, en el nombre del tipo de instancia m5d.xlarge, mes el nombre de la familia.
+Le sigue un número, que es5 en este caso. Representa el número de generaciónde ese tipo. Por lo tanto, una instancia m5es la quinta generación de la familia m. En general, las instancias con un número de generación más 
+alto son más potentes y ofrecen un mejor valor respecto del precio que las instancias con un número de generación más bajo.Después del número de generación, encontrará una pieza opcional que indica las capacidades adicionales 
+del tipo de instancia. En el ejemplo, la den el nombre indica que el tipo de instancia utiliza una unidad de estado sólido (SSD) para el volumen raíz de EBS en lugar de una unidad de disco duro (HDD) estándar.Formación y certificación
+ de AWSMódulo 4: Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los derechos reservados.36
+La siguiente parte del nombre, que sigue al punto (.) divisor, representa el tamañode la instancia. El tamaño del tipo de instancia define la especificación del rendimiento de una instancia en las categorías del rendimiento de la CPU, 
+la memoria, el almacenamiento y la red. En el ejemplo, xlargeindica que es una instancia extragrande. Para obtener la lista más reciente de los tipos de instancias de Amazon EC2, consulte la documentación de Tipos de instancia de 
+Amazon EC2.
+
+Dada la combinación de categorías de tipos de instancias, capacidades y opciones asociadas a un tipo de instancia, no es de extrañar que haya bastantes. En marzo de 2020, contamos más de 270tipos de instancias disponibles. 
+Esta amplia selección refleja la amplia y profunda riqueza de las ofertas de informática en la nube de AWS.La gran cantidad de tipos de instancias hace que sea difícil responder a la pregunta:¿Cómo se selecciona el tipo de instancia 
+adecuado para su carga de trabajo?Lo que se busca es elegir un tipo de instancia que proporcione el nivel de rendimientoque necesita la aplicación y, al mismo tiempo, garantice la utilización eficiente de los recursos de la instancia 
+para minimizar el costo.Si va a crear una instancia nueva, utilice la página InstanceTypes(Tipos de instancias) de la consola de Amazon EC2 para buscar y comparar las opciones. En esta página se muestran todos los tipos de instancias 
+disponibles en una región y se ofrecen capacidades de búsqueda y filtrado basadas en los valores de los atributos. Como recomendación, cuando elija un tipo de instancia en una familia, seleccione el tipo de instancia de última 
+generación, ya que normalmente tendrá una mejor relación precio-rendimiento. 
+
+Si ya tiene una instancia en ejecución, puede utilizar el servicio de AWS Compute Optimizerpara obtener recomendaciones sobre cómo optimizar el tipo de instancia. Este servicio puede analizar el comportamiento del tiempo de 
+ejecución de la instancia y hacer recomendaciones sobre cómo optimizarlo. Luego, puede evaluar las recomendaciones y modificar la instancia en consecuencia.
+
+AWS Compute Optimizeres un servicio que analiza las métricas de configuración y utilización de las instancias EC2 y los grupos de Auto Scaling. Realiza recomendaciones de optimización para reducir el costo y mejorar el 
+rendimiento de sus cargas de trabajo. Puede utilizar estas recomendaciones para decidir si desea cambiar a un nuevo tipo de instancia.Compute Optimizerutiliza Amazon Machine Learning(Amazon ML) para analizar las cargas de trabajo. 
+Actualmente, realiza recomendaciones sobre el tamaño y el tipo de instancia EC2 para las familias de instancias M, C, R, T y X. Cuando se activa, Compute Optimizeranaliza los recursos informáticos de AWS en ejecución y comienza a 
+ofrecer recomendaciones.Compute Optimizerclasifica las conclusiones de las instancias EC2 como Under-provisioned(Subaprovisionadas), Over-provisioned(Sobreaprovisionadas), Optimized(Optimizadas)o None(Ninguna). Puede que se clasifiquen 
+como None(Ninguna)si hace menos de 12horas que activó Compute Optimizer, cuando la instancia lleva ejecutándose menos de 30horas o cuando el tipo de instancia no es compatible con Compute Optimizer
+
+
+Cuando se lanza una nueva instancia EC2, el comportamiento predeterminado de Amazon EC2 consiste en minimizar los errores correlacionados mediante la distribución de las nuevas instancias por el hardware subyacente. 
+Puede usar grupos de ubicaciónpara influir en la ubicación de un grupo de instancias interdependientescon el fin de satisfacer las necesidades de la carga de trabajo.Dependiendo del tipo de carga de trabajo, 
+puede crear un grupo de ubicación con una de las siguientes estrategias de ubicación:•Clúster:agrupa las instancias unas cerca de otras dentro de una zona de disponibilidad. Esta estrategia permite que las cargas de trabajo 
+logren un rendimiento de la red de baja latencia.•Partición:distribuye las instancias entre las particiones lógicas de modo que los grupos de instancias de una partición no compartan el hardware subyacente con los grupos de 
+instancias de las demás particiones.•Distribuida:coloca estrictamente un pequeño grupo de instancias en distintos equipos de hardware subyacentes para reducir los errores correlacionados.Formación y certificación de AWSMódulo 4: 
+Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los derechos reservados.89
+
+Los grupos de ubicación de partición ayudan a reducir la probabilidad de errores 
+de hardware correlacionados para su aplicación. Cuando se utilizan grupos de ubicación 
+de partición, Amazon EC2 divide cada grupo en segmentos lógicos denominados particiones. Amazon EC2 garantiza que cada partición de un grupo de ubicación tenga su propio conjunto de bastidores. 
+Cada bastidor tiene su propia red y fuente de alimentación. No hay dosparticiones dentro de un grupo de ubicación que compartan los mismos bastidores, lo que le permite aislar el impacto de los errores de 
+hardware en la aplicación.Un grupo de ubicación de particiones puede tener particiones en varias zonas de disponibilidad en la misma región. Un grupo de ubicación de particiones puede tener un máximo de sieteparticiones 
+por zona de disponibilidad.Además, a través de estos grupos se obtiene visibilidad sobre las particiones y se permite que las aplicaciones compatibles con topologías utilicen esta información para tomar decisiones de replicación 
+de datos inteligentes, lo que puede incrementar los niveles de disponibilidad y durabilidad. Como resultado, normalmente se utilizan para implementar grandes cargas de trabajo distribuidas y replicadas, como Apache Hadoop, 
+Apache HBasey Apache Cassandra.Formación y certificación de AWSMódulo 4: Incorporación de una capa informática© 2021 Amazon Web Services, Inc. o sus filiales Todos los derechos reservados.91
