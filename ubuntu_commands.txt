@@ -16,6 +16,7 @@ WSL2 is the latest version of WSL, providing a more powerful and full-featured L
 
 In the context of an operating system (OS), a distro (short for distribution) refers to a specific version or variation of an OS, typically in the Linux and Unix ecosystem. A Linux distribution is a complete operating system built around the Linux kernel, bundled with various software, tools, libraries, and a package management system.
 
+Ubuntu terminal is named bash, and allow it managing files, install software and control the system.
 
 Key Components of a Linux Distro:
 Linux Kernel – The core part of the OS managing hardware and system processes.
@@ -26,22 +27,22 @@ Pre-installed Software – Text editors, browsers, system utilities, etc.
 System Utilities & Libraries – Essential components to run applications and services.
 
 Popular Linux Distributions:
-Debian-based:
-Ubuntu
-Linux Mint
-Kali Linux
-Red Hat-based:
-Fedora
-CentOS Stream
-Rocky Linux
-Arch-based:
-Arch Linux
-Manjaro
-Others:
-openSUSE
-Slackware
-Gentoo
-Each distribution is tailored for different user needs—some focus on stability (Debian, CentOS), usability (Ubuntu, Mint), security (Kali Linux), or customization (Arch, Gentoo).
+	Debian-based:
+		Ubuntu
+		Linux Mint
+		Kali Linux
+	Red Hat-based:
+		Fedora
+		CentOS Stream
+		Rocky Linux
+	Arch-based:
+		Arch Linux
+		Manjaro
+	Others:
+		openSUSE
+		Slackware
+		Gentoo
+	Each distribution is tailored for different user needs—some focus on stability (Debian, CentOS), usability (Ubuntu, Mint), security (Kali Linux), or customization (Arch, Gentoo).
 
 A Linux distribution (distro) is essentially a customized package of the Linux kernel along with system utilities, libraries, and applications that enable users to operate and interact with their computers efficiently. Let’s break down how a Linux distro works internally.
 
@@ -75,6 +76,7 @@ D. Filesystem Hierarchy
 	├── /usr - User applications and utilities
 	├── /var - Logs, caches, temporary files
 	├── /dev - Hardware devices (block storage, USB, etc.)
+	├── /mnt - Mounted drives (e.g., USB)
 	├── /proc - System and process information
 	├── /sys - Kernel and system info
 	└── /tmp - Temporary files
@@ -131,6 +133,57 @@ It returns the name of the init system running on the machine. Possible outputs 
 	busybox or runit → If using a lightweight init system.
 	upstart → If using Upstart (older Ubuntu versions).
 
+1️⃣ How Does Ubuntu Work?
+	Ubuntu works similarly to other operating systems like Windows or macOS, but with some key differences:
+
+		It is open-source and free.
+		Uses the Linux kernel as its core.
+		Supports a wide range of software applications (both GUI and command-line).
+		Uses a package manager (apt) to install and update software.
+		Can be used as a desktop OS, server, or even on embedded devices.
+Key Components
+	Kernel – The core part of Ubuntu that interacts with hardware.
+	Shell (Command Line) – Interface for running commands (e.g., Bash, Zsh).
+	Desktop Environment – Graphical interface (GNOME, KDE, XFCE, etc.).
+	Package Manager (apt) – Installs and updates software.
+	File System – Uses a hierarchy like /home, /etc, /bin, etc.
+2️⃣ What is Ubuntu?
+	🔹 Ubuntu at a Glance
+		Created by Canonical Ltd. in 2004.
+		Based on Debian Linux.
+		Available in different flavors (Desktop, Server, Cloud, IoT).
+		Comes in Long-Term Support (LTS) versions (supported for 5 years).
+	Edition	|  Purpose
+Ubuntu Desktop  |  For personal use, graphical UI, web browsing, office work.
+  Ubuntu Server	|  For hosting websites, databases, and cloud services.
+   Ubuntu Core	|  For IoT (Internet of Things) devices.
+ Ubuntu Flavors	|  Variants with different desktop environments (Kubuntu, Xubuntu, Lubuntu).
+
+3️⃣ How to Use Ubuntu?
+	🔹 Basic Commands
+	To use Ubuntu efficiently, you should learn some basic terminal commands:
+
+	💻 Navigation & File Management
+	Command	        |Description
+	pwd		|Show current directory
+	ls		|List files and folders
+	cd foldername	|Change directory
+	mkdir foldername|Create a new folder
+	rm filename	|Delete a file
+	rm -r foldername|Delete a folder
+
+🔹 Installing Software
+	Ubuntu uses apt (Advanced Package Tool) to install and update software.
+
+🔹 Ubuntu GUI (Graphical Interface)
+	If you're using Ubuntu Desktop, you'll interact with GNOME, the default graphical user interface. Here are some key elements:
+
+		Activities Overview (Super key/Windows key) – Search and open applications.
+		File Manager – Browse files and folders (similar to Windows Explorer).
+		Settings – Adjust system preferences.
+		Terminal – Access the command line.
+
+
 
 
 1. Create mockoon into Ubuntu subsystem: docker run -d --name response_updated_pocket_sucessful --mount type=bind,source=/mnt/c/practice_test/LocalEnviroment/edit_pocket_succesful_mock.json,target=/data/,readonly -p 3001:3001 mockoon/cli:latest --data /data --port 3001
@@ -162,8 +215,7 @@ It returns the name of the init system running on the machine. Possible outputs 
 25. restar WSL: wsl --shutdown
 26. Verify systemd is running: systemctl list-units --type=service
 
-INSIDE WSL UBUNTU, YOU CAN ACCESS YOUR WINDOWS FILES AT:
-27. ACCESS WINDOWS FILE: cd /mnt/c/ 
+27. INSIDE WSL UBUNTU, YOU CAN ACCESS YOUR WINDOWS FILES AT ACCESS WINDOWS FILE: cd /mnt/c/ 
 28. See folder: ls
 29. To See if file is accesible: ls -l /mnt/c/practice_test/LocalEnvironment/
 30. See permisión: ls -l /mnt/c/file
@@ -172,6 +224,26 @@ INSIDE WSL UBUNTU, YOU CAN ACCESS YOUR WINDOWS FILES AT:
 33. Init docker into Ubuntu by default: sudo systemctl enable docker
 34. to see content into file wsl.conf using Ubuntu: cat /etc/wsl.conf
 35. /mnt/: is a mounting from windows file. Embebbed system ubuntu into Windows.
+36. Update system: sudo apt update && sudo apt upgrade -y
+37.Install an application: sudo apt install app-name
+38. Install VLC Media Player: sudo apt install vlc
+39. Uninstall an application: sudo apt remove app-name
+USER & PERMISSIONS:
+40. show current user: whoami
+41. run a command as an admin (root): sudo command
+42. Make a file executable: chmod +x file.sh
+43. Change file ownership: chown user:group file
+SYSTEM MANAGEMENT:
+44. check disk space: df -h
+45. check RAM usage: free -m
+46. List running processes: ps aux.
+47. Monitor system performance: top or htop
+
+
+
+
+
+
 
 
 
