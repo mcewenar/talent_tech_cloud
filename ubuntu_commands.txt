@@ -1,0 +1,180 @@
+INTRODUCTION:
+
+Using Ubuntu on WSL2 allows you to:
+
+	Run Linux commands (grep, sed, awk, vim, etc.).
+	Install and use Linux development tools (Python, Node.js, Golang, etc.).
+	Run Docker natively with systemd support.
+	Use Bash scripts and automation.
+	Access Windows files from Linux (/mnt/c/Users/...).
+	Develop cross-platform applications easily.
+
+Windows Subsystem for Linux 2 (WSL2) Using Ubuntu
+	Windows Subsystem for Linux (WSL) is a compatibility layer in Windows that allows you to run a Linux environment (including 	command-line tools, utilities, and applications) directly on Windows without using a virtual machine (VM) or dual-boot setup.
+
+WSL2 is the latest version of WSL, providing a more powerful and full-featured Linux experience on Windows.
+
+In the context of an operating system (OS), a distro (short for distribution) refers to a specific version or variation of an OS, typically in the Linux and Unix ecosystem. A Linux distribution is a complete operating system built around the Linux kernel, bundled with various software, tools, libraries, and a package management system.
+
+
+Key Components of a Linux Distro:
+Linux Kernel – The core part of the OS managing hardware and system processes.
+Package Manager – Tools like apt (Debian-based) or dnf (Fedora-based) that manage software installation and updates.
+Shell & Terminal – Command-line interfaces like Bash or Zsh.
+Graphical User Interface (GUI) – Desktop environments such as GNOME, KDE, or XFCE.
+Pre-installed Software – Text editors, browsers, system utilities, etc.
+System Utilities & Libraries – Essential components to run applications and services.
+
+Popular Linux Distributions:
+Debian-based:
+Ubuntu
+Linux Mint
+Kali Linux
+Red Hat-based:
+Fedora
+CentOS Stream
+Rocky Linux
+Arch-based:
+Arch Linux
+Manjaro
+Others:
+openSUSE
+Slackware
+Gentoo
+Each distribution is tailored for different user needs—some focus on stability (Debian, CentOS), usability (Ubuntu, Mint), security (Kali Linux), or customization (Arch, Gentoo).
+
+A Linux distribution (distro) is essentially a customized package of the Linux kernel along with system utilities, libraries, and applications that enable users to operate and interact with their computers efficiently. Let’s break down how a Linux distro works internally.
+
+1. Core Components of a Linux Distro
+	A Linux distro is built upon a structured hierarchy of components that work together to provide a functional operating system.
+
+A. Linux Kernel (Core of the OS)
+	The Linux kernel acts as the bridge between hardware and software.
+	It handles process management, memory management, hardware drivers, and system security.
+	Distros might use different kernel versions and apply custom patches for performance or security enhancements.
+B. Init System (Boot & Service Management)
+	The init system is responsible for booting up the OS and managing background services (daemons).
+	Common init systems:
+		systemd (Most modern distros like Ubuntu, Fedora, Arch)
+		SysVinit (Older systems)
+		OpenRC (Gentoo, Alpine Linux)
+
+C. Shell & Command Line Interface (CLI)
+	The shell provides an interface for interacting with the OS.
+	Common shells:
+		Bash (Most common)
+		Zsh (Popular alternative)
+		Fish, Tcsh
+D. Filesystem Hierarchy
+	Linux distros follow the Filesystem Hierarchy Standard (FHS):
+	/ (root) - Base of the file system
+	├── /bin - Essential command binaries
+	├── /etc - System configuration files
+	├── /home - User directories
+	├── /lib - Essential libraries
+	├── /usr - User applications and utilities
+	├── /var - Logs, caches, temporary files
+	├── /dev - Hardware devices (block storage, USB, etc.)
+	├── /proc - System and process information
+	├── /sys - Kernel and system info
+	└── /tmp - Temporary files
+E. Package Management System
+	Distros include a package manager to install, update, and remove software.
+	Different distros use different package managers:
+		Debian-based: dpkg, apt
+		RedHat-based: dnf, rpm
+		Arch-based: pacman
+		Gentoo: portage
+	Packages are stored in repositories (repos), which contain pre-compiled software.
+F. Desktop Environment (GUI)
+	Provides a graphical interface for users who don’t prefer CLI.
+	Common desktop environments:
+		GNOME (Fedora, Ubuntu)
+		KDE Plasma (Kubuntu, Manjaro KDE)
+		XFCE, LXDE, Cinnamon, MATE (Lightweight options)
+
+2. How a Linux Distro Works Step-by-Step
+	A. Boot Process
+		BIOS/UEFI initializes the hardware.
+		Bootloader (GRUB, systemd-boot, LILO) loads the Linux kernel.
+		Kernel initializes system hardware and mounts the root filesystem.
+		Init system (systemd) starts background services (networking, logging, display server).
+		Login prompt appears (CLI or graphical interface).
+	B. Process Management
+		The kernel schedules processes and allocates CPU time.
+		Processes can be:
+			Foreground (e.g., running a command in terminal)
+			Background (Daemon/Service) (e.g., SSH server, Apache web server)
+	C. User and Permissions
+		Linux is a multi-user OS:
+			Root (Administrator)
+			Regular users
+			Groups for permission management
+		The permissions system controls file access (rwx for read, write, execute).
+	D. Filesystem Management
+		Everything in Linux is treated as a file (including devices like /dev/sda1).
+		Uses different filesystems like:
+			ext4 (default in most distros)
+			XFS, Btrfs, ZFS (advanced features)
+	E. Networking
+		Network interfaces are managed via:
+			NetworkManager (GUI & CLI)
+			ifconfig/ip (CLI)
+		Supports networking protocols:
+			TCP/IP, SSH, FTP, HTTP, etc.
+		Uses firewalls (iptables, firewalld, UFW) for security.
+
+It returns the name of the init system running on the machine. Possible outputs include:
+
+	init → If using SysVinit.
+	systemd → If using systemd (modern Ubuntu versions).
+	busybox or runit → If using a lightweight init system.
+	upstart → If using Upstart (older Ubuntu versions).
+
+
+
+1. Create mockoon into Ubuntu subsystem: docker run -d --name response_updated_pocket_sucessful --mount type=bind,source=/mnt/c/practice_test/LocalEnviroment/edit_pocket_succesful_mock.json,target=/data/,readonly -p 3001:3001 mockoon/cli:latest --data /data --port 3001
+
+2. Start Docker: systemctl start docker or sudo systemctl start docker
+3. Get docker info: docker info
+4. Execute file: sh /mnt/c/banco/distribution_router/superApp/init.sh or sh init.sh
+5. Update docker in Ubunto: sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -	m)" -o /usr/local/bin/docker-compose
+	sudo chmod +x /usr/local/bin/docker-compose
+6.To check if systemd is working, run: ps --no-headers -o comm 1
+7. systemctl start apache2
+8. systemctl stop MySQL
+9. systemctl restart nginx
+10. systemctl list-units --type=service
+11. systemctl poweroff
+12. write on location: echo -e "[boot]\nsystemd=true" | sudo tee -a /etc/wsl.conf: echo= enable newline. tee= appends (-a) the text to 	/etc/wsl.conf while 							using sudo
+13. Open the file in the nano editor: sudo nano /etc/wsl.conf
+14. Restart WSL: wsl
+15. Verify if systemd is running: systemctl list-units --type=service
+16. Install dependencies: sudo apt install wsl
+17. wsl --install
+18. wsl --list --online
+19. install ubuntu into Windows: wsl --install -d Ubuntu
+20. Install WSL2 by default: wsl --set-version Ubuntu 2 (and) wsl --set-default-version 2
+21. check wsl: wsl --list --verbose
+22. Open Ubuntu from the Start menu or Windows Terminal: sudo apt update && sudo apt upgrade -y
+23. To check if you're running WSL2: uname -r
+24. Edit the WSL config file: sudo nano /etc/wsl.conf (and adding text)
+25. restar WSL: wsl --shutdown
+26. Verify systemd is running: systemctl list-units --type=service
+
+INSIDE WSL UBUNTU, YOU CAN ACCESS YOUR WINDOWS FILES AT:
+27. ACCESS WINDOWS FILE: cd /mnt/c/ 
+28. See folder: ls
+29. To See if file is accesible: ls -l /mnt/c/practice_test/LocalEnvironment/
+30. See permisión: ls -l /mnt/c/file
+31. Amend mode permition: chmod +r /mnt/c/banco/practice_test/LocalEnvironment/edit_pocket_succesful_mock.json
+32. Init docker into Ubuntu: sudo systemctl start docker
+33. Init docker into Ubuntu by default: sudo systemctl enable docker
+34. to see content into file wsl.conf using Ubuntu: cat /etc/wsl.conf
+35. /mnt/: is a mounting from windows file. Embebbed system ubuntu into Windows.
+
+
+
+
+
+
